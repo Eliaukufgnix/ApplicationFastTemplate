@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+}
+
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">Id<span style="color:red;">*</span></label>
+        <div class="layui-col-xs10">
+            <input type="text" name="id" lay-verify="required" lay-reqtext="请输入Id" placeholder="请输入Id" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-row">
+            <label class="layui-form-label">功能参数</label>
+            <div class="layui-col-xs10">
+                <input type="text" name="funcpara" placeholder="请输入功能参数" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">功能名称<span style="color:red;">*</span></label>
+        <div class="layui-col-xs10">
+            <input type="text" name="funcname" lay-verify="required" lay-reqtext="请输入功能名称" placeholder="请输入功能名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">功能路径<span style="color:red;">*</span></label>
+        <div class="layui-col-xs10">
+            <input type="text" name="funcurl" lay-verify="required" lay-reqtext="请输入功能路径" placeholder="请输入功能路径" lay-affix="clear" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">图标<span style="color:red;">*</span></label>
+        <div class="layui-col-xs10">
+            <input type="text" name="funcicon" lay-verify="required" lay-reqtext="请输入图标" placeholder="请输入图标" lay-affix="clear" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">父节点<span style="color:red;">*</span></label>
+        <div class="layui-col-xs10">
+            <input type="text" name="funcurl" lay-verify="required" lay-reqtext="请输入父节点" placeholder="请输入父节点" lay-affix="clear" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn" lay-submit lay-filter="btnSubmit">添加</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<script>
+    layui.use(['form', 'laydate', 'util'], function () {
+        let form = layui.form;
+        let layer = layui.layer;
+        let $ = layui.jquery;
+        // 提交事件
+        form.on('submit(btnSubmit)', function (data) {
+            var field = data.field; // 获取表单字段值
+            // 显示填写结果，仅作演示用
+            layer.alert(JSON.stringify(field), {
+                title: '当前填写的字段值'
+            });
+            // 此处可执行 Ajax 等操作
+            // …
+            console.log({ "funcDto": JSON.stringify(field) });
+            $.ajax({
+                url: "/Func/AddFunc",
+                data: { "funcDto": field},
+                type: "POST",
+                success: function (res) {
+                    console.log(res);
+                }
+            });
+            return false; // 阻止默认 form 跳转
+        });
+    });
+</script>
+

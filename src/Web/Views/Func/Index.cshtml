@@ -1,0 +1,401 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .expand.pear-btn:hover {
+        color: currentColor;
+        background: none;
+    }
+
+    .expand.pear-btn {
+        border: 1px solid rgba(255, 255, 255, 0)
+    }
+</style>
+<div class="layui-card">
+    <div class="layui-card-body">
+        <form id="funcForm" class="layui-form" action="">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="realName" placeholder="" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">账号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="funcname" placeholder="" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">账号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="funcname" placeholder="" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">账号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="funcname" placeholder="" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">账号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="funcname" placeholder="" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline" style="margin-left: 50px;">
+                    <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="func-query">
+                        <i class="layui-icon layui-icon-search"></i>
+                        查询
+                    </button>
+                    <button type="reset" class="pear-btn pear-btn-md">
+                        <i class="layui-icon layui-icon-refresh"></i>
+                        重置
+                    </button>
+                    <button type="button" class="pear-btn pear-btn-md expand">
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="layui-card">
+    <div class="layui-card-body">
+        <table id="func-table" lay-filter="func-table"></table>
+    </div>
+</div>
+
+<script type="text/html" id="func-toolbar">
+    <button class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
+        <i class="layui-icon layui-icon-add-1"></i>
+        新增
+    </button>
+    <button class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
+        <i class="layui-icon layui-icon-delete"></i>
+        删除
+    </button>
+</script>
+
+<script type="text/html" id="func-bar">
+    <button class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit">
+        <i class="layui-icon layui-icon-edit"></i>
+    </button>
+    <button class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove">
+        <i class="layui-icon layui-icon-delete"></i>
+    </button>
+</script>
+
+@*<script type="text/html" id="func-enable">
+    <input type="checkbox" name="enable" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="func-enable"
+           checked="{{ d.enable == 0 ? 'true' : 'false' }}">
+</script>*@
+
+@*<script type="text/html" id="func-sex">
+    {{#if (d.sex == 1) { }}
+    <span>男</span>
+    {{# }else if(d.sex == 2){ }}
+    <span>女</span>
+    {{# } }}
+</script>*@
+
+@*<script type="text/html" id="func-login">
+    {{#if (d.login == 0) { }}
+    <span>在线</span>
+    {{# }else if(d.sex == 1){ }}
+    <span>离线</span>
+    {{# } }}
+</script>*@
+
+@*<script type="text/html" id="func-createTime">
+    {{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}
+</script>*@
+
+@*<div style="display: none;">
+    <div class="layer-top">
+        <br />
+        <h3>上侧弹层内容...</h3>
+    </div>
+</div>*@
+
+<script>
+    layui.use(['table', 'form', 'jquery', 'drawer', 'dropdown'], function () {
+        let table = layui.table;
+        let form = layui.form;
+        let $ = layui.jquery;
+        let drawer = layui.drawer;
+        let dropdown = layui.dropdown;
+        let layer = layui.layer;
+        let MODULE_PATH = "/Func";
+
+        formToggle({
+            elem: "#funcForm",
+        });
+
+        function formToggle(options) {
+            var defaultsOpt = {
+                isExpand: false,
+                prefixIcon: "layui-icon",
+                toggleIcon: ['layui-icon-down', 'layui-icon-up'],
+                toggleText: ['展开', '折叠'],
+            }
+            var opt = $.extend({}, defaultsOpt, options);
+            var elem = opt.elem; // 绑定的表单元素,必填
+            var min = opt.min; // 最小显示数,默认显示一行
+            var isExpand = opt.isExpand; // 初始展开
+            var prefixIcon = opt.prefixIcon + " "; // 图标前缀
+            var toggleIcon = opt.toggleIcon; // 折叠和展开时的图标类[unExpandIcon, ExpandIcon]
+            var toggleText = opt.toggleText; // 折叠和展开时的文本
+
+            var eleDOM = $(elem + " .layui-inline");
+            var firstElTop = eleDOM.first().offset().top;
+            var targetEl = eleDOM.filter(function (index) {
+                var isGtMin = (index + 1) > min;
+                var isGtFirstElTop = $(this).offset().top > firstElTop;
+                var isNeqLast = (index + 1) != eleDOM.length;
+                return min ? isGtMin && isNeqLast : isGtFirstElTop && isNeqLast;
+            });
+
+            var unExpandIcon = prefixIcon + toggleIcon[0];
+            var expandIcon = prefixIcon + toggleIcon[1];
+            var unExpandText = toggleText[0];
+            var expandText = toggleText[1];
+            var btnSelector = elem + " .expand";
+            $(btnSelector).append("<i></i>")
+            if (targetEl.length > 0) {
+                if (isExpand) {
+                    $(btnSelector).prepend("<span>" + expandText + "</span>");
+                    $(btnSelector + ">i").addClass(expandIcon);
+                } else {
+                    $(btnSelector).prepend("<span>" + unExpandText + "</span>")
+                    $(btnSelector + ">i").addClass(unExpandIcon)
+                    targetEl.addClass("layui-hide");
+                }
+                $(btnSelector).click(function () {
+                    isExpand = !isExpand;
+                    if (isExpand) {
+                        $(btnSelector + ">span").html(expandText);
+                        $(btnSelector + ">i").removeClass(unExpandIcon).addClass(expandIcon);
+                        targetEl.removeClass("layui-hide")
+                    } else {
+                        $(btnSelector + ">span").html(unExpandText);
+                        $(btnSelector + ">i").removeClass(expandIcon).addClass(unExpandIcon);
+                        targetEl.addClass("layui-hide")
+                    }
+                })
+            }
+        }
+
+        let cols = [
+            [{
+                type: 'checkbox'
+            },
+            {
+                title: 'Id',
+                field: 'Id',
+                align: 'center'
+            },
+            {
+                title: '菜单名称',
+                field: 'FuncName',
+                align: 'center'
+            },
+            {
+                title: '菜单参数',
+                field: 'FuncPara',
+                align: 'center'
+            },
+            {
+                title: 'Url',
+                field: 'FuncUrl',
+                align: 'center'
+            },
+            {
+                title: '图标',
+                field: 'FuncIcon',
+                align: 'center'
+            },
+            {
+                title: '父节点',
+                field: 'PartentId',
+                align: 'center'
+            },
+            {
+                title: '创建人',
+                field: 'CreateUser',
+                align: 'center'
+            },
+            {
+                title: '创建日期',
+                field: 'CreateDate',
+                align: 'center'
+            },
+            {
+                title: '创建时间',
+                field: 'CreateTime',
+                align: 'center'
+            },
+            {
+                title: '更新人',
+                field: 'LogUser',
+                align: 'center'
+            },
+            {
+                title: '更新日期',
+                field: 'LogDate',
+                align: 'center'
+            },
+            {
+                title: '更新时间',
+                field: 'LogTime',
+                align: 'center'
+            },
+            {
+                title: '操作',
+                toolbar: '#func-bar',
+                align: 'left',
+                fixed: 'right'
+            }
+            ]
+        ]
+
+        table.render({
+            elem: '#func-table',
+            url: MODULE_PATH +"/GetFunc",
+            page: true,
+            cols: cols,
+            skin: 'line',
+            toolbar: '#func-toolbar',
+            defaultToolbar: [{
+                layEvent: 'refresh',
+                icon: 'layui-icon-refresh',
+            }, 'filter', 'print', 'exports']
+        });
+
+        table.on('tool(func-table)', function (obj) {
+            if (obj.event === 'remove') {
+                window.remove(obj);
+            } else if (obj.event === 'edit') {
+                window.edit(obj);
+            }
+        });
+
+        table.on('toolbar(func-table)', function (obj) {
+            if (obj.event === 'add') {
+                window.add();
+            } else if (obj.event === 'refresh') {
+                window.refresh();
+            } else if (obj.event === 'batchRemove') {
+                window.batchRemove(obj);
+            }
+        });
+
+        form.on('submit(func-query)', function (data) {
+            table.reload('func-table', {
+                where: data.field
+            })
+            return false;
+        });
+
+        form.on('switch(func-enable)', function (obj) {
+            layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
+        });
+
+        window.add = function () {
+            layer.open({
+                type: 2,
+                title: '添加功能菜单',
+                shadeClose: true,
+                maxmin: true, //开启最大化最小化按钮
+                area: ['900px', '600px'],
+                content: MODULE_PATH +'/Detail'
+            });
+        }
+
+        window.edit = function (obj) {
+            layer.msg("修改");
+        }
+
+        window.remove = function (obj) {
+            layer.confirm('确定要删除该用户', {
+                icon: 3,
+                title: '提示'
+            }, function (index) {
+                layer.close(index);
+                let loading = layer.load();
+                $.ajax({
+                    url: MODULE_PATH + "/Remove/" + obj.data['funcId'],
+                    dataType: 'json',
+                    type: 'delete',
+                    success: function (result) {
+                        layer.close(loading);
+                        if (result.success) {
+                            layer.msg(result.msg, {
+                                icon: 1,
+                                time: 1000
+                            }, function () {
+                                obj.del();
+                            });
+                        } else {
+                            layer.msg(result.msg, {
+                                icon: 2,
+                                time: 1000
+                            });
+                        }
+                    }
+                })
+            });
+        }
+
+        window.batchRemove = function (obj) {
+            let data = table.checkStatus(obj.config.id).data;
+            if (data.length === 0) {
+                layer.msg("未选中数据", {
+                    icon: 3,
+                    time: 1000
+                });
+                return false;
+            }
+            let ids = "";
+            for (let i = 0; i < data.length; i++) {
+                ids += data[i].Id + ",";
+            }
+            ids = ids.substr(0, ids.length - 1);
+            layer.confirm('确定要删除这些数据吗', {
+                icon: 3,
+                title: '提示'
+            }, function (index) {
+                layer.close(index);
+                let loading = layer.load();
+                $.ajax({
+                    url: MODULE_PATH + "/batchRemove/" + ids,
+                    dataType: 'json',
+                    type: 'delete',
+                    success: function (result) {
+                        layer.close(loading);
+                        if (result.success) {
+                            layer.msg(result.msg, {
+                                icon: 1,
+                                time: 1000
+                            }, function () {
+                                table.reload('func-table');
+                            });
+                        } else {
+                            layer.msg(result.msg, {
+                                icon: 2,
+                                time: 1000
+                            });
+                        }
+                    }
+                })
+            });
+        }
+
+        window.refresh = function (param) {
+            table.reload('func-table');
+        }
+    })
+</script>
+

@@ -1,0 +1,318 @@
+[
+  {
+    "id": 0,
+    "title": "首页",
+    "type": 1,
+    "icon": "layui-icon layui-icon-console",
+    "openType": "_iframe",
+    "href": "view/console/console1.html"
+  },
+  {
+    "id": 1,
+    "title": "系统及门户管理",
+    "type": 0,
+    "icon": "layui-icon layui-icon-console",
+    "href": "",
+    "children": [
+      {
+        "id": 10,
+        "title": "系统设置",
+        "icon": "layui-icon layui-icon-console",
+        "type": 0,
+        "href": "",
+        "children": [
+          {
+            "id": 100,
+            "title": "系统参数维护",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 101,
+            "title": "多语言维护",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 102,
+            "title": "系统菜单管理",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "/func/index"
+          },
+          {
+            "id": 103,
+            "title": "功能组菜单权限",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "一个功能组包括多个成员，一个功能组分配权限"
+          },
+          {
+            "id": 104,
+            "title": "Logo上传及样式设定",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "日志管理",
+        "icon": "layui-icon layui-icon-console",
+        "type": 0,
+        "href": "",
+        "children": [
+          {
+            "id": 110,
+            "title": "接口日志",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 111,
+            "title": "操作日志",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 112,
+            "title": "登录日志",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 113,
+            "title": "邮件模板说明",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 114,
+            "title": "邮件提醒模板",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 115,
+            "title": "邮件发送记录",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "公告维护",
+        "icon": "layui-icon layui-icon-console",
+        "type": 0,
+        "href": "",
+        "children": [
+          {
+            "id": 120,
+            "title": "发布公告",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 121,
+            "title": "公告管理",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 122,
+            "title": "发布消息",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 123,
+            "title": "消息管理",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 124,
+            "title": "发布企管",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 125,
+            "title": "企管管理",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 126,
+            "title": "规章制度",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 127,
+            "title": "使用建议",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 128,
+            "title": "使用建议（供应商）",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          },
+          {
+            "id": 129,
+            "title": "系统帮助",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "基础数据管理",
+    "type": 0,
+    "icon": "layui-icon layui-icon-console",
+    "href": "",
+    "children": [
+      {
+        "id": 20,
+        "title": "控制后台",
+        "icon": "layui-icon layui-icon-console",
+        "type": 0,
+        "href": "",
+        "children": [
+          {
+            "id": 200,
+            "title": "系统设置",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "供应商生命周期管理",
+    "type": 0,
+    "icon": "layui-icon layui-icon-console",
+    "href": "",
+    "children": [
+      {
+        "id": 30,
+        "title": "控制后台",
+        "icon": "layui-icon layui-icon-console",
+        "type": 0,
+        "href": "",
+        "children": [
+          {
+            "id": 300,
+            "title": "系统设置",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "采购寻源管理",
+    "type": 0,
+    "icon": "layui-icon layui-icon-console",
+    "href": "",
+    "children": [
+      {
+        "id": 40,
+        "title": "控制后台",
+        "icon": "layui-icon layui-icon-console",
+        "type": 0,
+        "href": "",
+        "children": [
+          {
+            "id": 400,
+            "title": "系统设置",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "采购协同管理",
+    "type": 0,
+    "icon": "layui-icon layui-icon-console",
+    "href": "",
+    "children": [
+      {
+        "id": 50,
+        "title": "控制后台",
+        "icon": "layui-icon layui-icon-console",
+        "type": 0,
+        "href": "",
+        "children": [
+          {
+            "id": 500,
+            "title": "系统设置",
+            "icon": "layui-icon layui-icon-console",
+            "type": 1,
+            "openType": "_iframe",
+            "href": "view/console/console1.html"
+          }
+        ]
+      }
+    ]
+  }
+]
