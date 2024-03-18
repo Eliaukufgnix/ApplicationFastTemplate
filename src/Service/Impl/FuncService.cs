@@ -1,12 +1,17 @@
-﻿using Models;
+﻿using AutoMapper;
+using Common.Utils;
+using Models;
 using Repository;
+using System;
 
 namespace Service
 {
     public class FuncService : BaseService<Func>, IFuncService
     {
-        public FuncService(IBaseRepository<Func> repository) : base(repository)
+        private readonly IMapper mapper;
+        public FuncService(IBaseRepository<Func> repository, IMapper mapper) : base(repository)
         {
+            this.mapper = mapper;
         }
 
         /// <summary>
@@ -15,16 +20,35 @@ namespace Service
         /// <typeparam name="T"></typeparam>
         /// <param name="Entity"></param>
         /// <returns></returns>
-        public bool Add(FuncDTO funcDTO)
+        public bool AddFunc(FuncDTO funcDTO)
         {
-            Func func = new Func();
-            func.Id = funcDTO.Id;
-            func.FuncPara = funcDTO.FuncPara;
-            func.FuncName = funcDTO.FuncName;
-            func.FuncUrl = funcDTO.FuncUrl;
-            func.FuncIcon = funcDTO.FuncIcon;
-            func.PartentId = funcDTO.PartentId;
+            if (repository.GetAny(x => x.Id == funcDTO.Id))
+            {
+                throw new Exception("数据id不可重复！");
+            }
+            Func func = mapper.Map<FuncDTO, Func>(funcDTO);
+            func.CreateUser = "admin";
+            func.CreateDate = DateTimeHelper.GetDateNowInt();
+            func.CreateTime = DateTimeHelper.GetTimeNowInt();
+            func.LogUser = "admin";
+            func.LogDate = DateTimeHelper.GetDateNowInt();
+            func.LogTime = DateTimeHelper.GetTimeNowInt();
             return repository.Add(func);
+        }
+        public bool UpdateFunc(FuncDTO funcDTO)
+        {
+            if (!repository.GetAny(x => x.Id == funcDTO.Id))
+            {
+                throw new Exception("未找到该数据信息！");
+            }
+            Func func = repository.FindByID(funcDTO.Id);
+            // 使用 AutoMapper 更新 FuncDTO 的属性到已存在的 Func 实体
+            mapper.Map(funcDTO, func); 
+            func.LogUser = "admin";
+            func.LogDate = DateTimeHelper.GetDateNowInt();
+            func.LogTime = DateTimeHelper.GetTimeNowInt();
+
+            return repository.Update(func);
         }
     }
 }

@@ -17,33 +17,33 @@
         <form id="funcForm" class="layui-form" action="">
             <div class="layui-form-item">
                 <div class="layui-inline">
-                    <label class="layui-form-label">用户名</label>
+                    <label class="layui-form-label">Id</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="realName" placeholder="" class="layui-input">
+                        <input type="text" name="Id" placeholder="" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label class="layui-form-label">账号</label>
+                    <label class="layui-form-label">菜单名称</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="funcname" placeholder="" class="layui-input">
+                        <input type="text" name="FuncName" placeholder="" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label class="layui-form-label">账号</label>
+                    <label class="layui-form-label">Url</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="funcname" placeholder="" class="layui-input">
+                        <input type="text" name="FuncUrl" placeholder="" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label class="layui-form-label">账号</label>
+                    <label class="layui-form-label">图标</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="funcname" placeholder="" class="layui-input">
+                        <input type="text" name="FuncIcon" placeholder="" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label class="layui-form-label">账号</label>
+                    <label class="layui-form-label">父节点</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="funcname" placeholder="" class="layui-input">
+                        <input type="text" name="ParentId" placeholder="" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-inline" style="margin-left: 50px;">
@@ -89,36 +89,36 @@
 </script>
 
 @*<script type="text/html" id="func-enable">
-    <input type="checkbox" name="enable" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="func-enable"
-           checked="{{ d.enable == 0 ? 'true' : 'false' }}">
-</script>*@
+        <input type="checkbox" name="enable" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="func-enable"
+               checked="{{ d.enable == 0 ? 'true' : 'false' }}">
+    </script>*@
 
 @*<script type="text/html" id="func-sex">
-    {{#if (d.sex == 1) { }}
-    <span>男</span>
-    {{# }else if(d.sex == 2){ }}
-    <span>女</span>
-    {{# } }}
-</script>*@
+        {{#if (d.sex == 1) { }}
+        <span>男</span>
+        {{# }else if(d.sex == 2){ }}
+        <span>女</span>
+        {{# } }}
+    </script>*@
 
 @*<script type="text/html" id="func-login">
-    {{#if (d.login == 0) { }}
-    <span>在线</span>
-    {{# }else if(d.sex == 1){ }}
-    <span>离线</span>
-    {{# } }}
-</script>*@
+        {{#if (d.login == 0) { }}
+        <span>在线</span>
+        {{# }else if(d.sex == 1){ }}
+        <span>离线</span>
+        {{# } }}
+    </script>*@
 
 @*<script type="text/html" id="func-createTime">
-    {{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}
-</script>*@
+        {{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}
+    </script>*@
 
 @*<div style="display: none;">
-    <div class="layer-top">
-        <br />
-        <h3>上侧弹层内容...</h3>
-    </div>
-</div>*@
+        <div class="layer-top">
+            <br />
+            <h3>上侧弹层内容...</h3>
+        </div>
+    </div>*@
 
 <script>
     layui.use(['table', 'form', 'jquery', 'drawer', 'dropdown'], function () {
@@ -195,31 +195,31 @@
             {
                 title: 'Id',
                 field: 'Id',
-                align: 'center'
+                align: 'center',
+                sort: true
             },
             {
                 title: '菜单名称',
                 field: 'FuncName',
-                align: 'center'
+                sort: true
             },
             {
                 title: '菜单参数',
                 field: 'FuncPara',
-                align: 'center'
+                align: 'center',
+                sort: true
             },
             {
                 title: 'Url',
-                field: 'FuncUrl',
-                align: 'center'
+                field: 'FuncUrl'
             },
             {
                 title: '图标',
-                field: 'FuncIcon',
-                align: 'center'
+                field: 'FuncIcon'
             },
             {
-                title: '父节点',
-                field: 'PartentId',
+                title: '父节点 <i class="layui-icon layui-icon-tips layui-font-14" lay-event="ParentId-tips" title="ROOT代表根节点" style="margin-left: 5px;"></i>',
+                field: 'ParentId',
                 align: 'center'
             },
             {
@@ -230,12 +230,14 @@
             {
                 title: '创建日期',
                 field: 'CreateDate',
-                align: 'center'
+                align: 'center',
+                sort: true
             },
             {
                 title: '创建时间',
                 field: 'CreateTime',
-                align: 'center'
+                align: 'center',
+                sort: true
             },
             {
                 title: '更新人',
@@ -245,12 +247,14 @@
             {
                 title: '更新日期',
                 field: 'LogDate',
-                align: 'center'
+                align: 'center',
+                sort: true
             },
             {
                 title: '更新时间',
                 field: 'LogTime',
-                align: 'center'
+                align: 'center',
+                sort: true
             },
             {
                 title: '操作',
@@ -263,15 +267,21 @@
 
         table.render({
             elem: '#func-table',
-            url: MODULE_PATH +"/GetFunc",
+            url: MODULE_PATH + "/GetFunc",
+            method:"POST",
             page: true,
             cols: cols,
-            skin: 'line',
+            skin: 'grid',
             toolbar: '#func-toolbar',
             defaultToolbar: [{
                 layEvent: 'refresh',
                 icon: 'layui-icon-refresh',
-            }, 'filter', 'print', 'exports']
+                title: '刷新'
+            }, 'filter', 'print', 'exports'],
+            initSort: {
+                field: 'Id', // 按 Id 字段排序
+                type: 'asc' // 升序排序
+            }
         });
 
         table.on('tool(func-table)', function (obj) {
@@ -293,6 +303,7 @@
         });
 
         form.on('submit(func-query)', function (data) {
+            console.log(data.field);
             table.reload('func-table', {
                 where: data.field
             })
@@ -307,31 +318,39 @@
             layer.open({
                 type: 2,
                 title: '添加功能菜单',
-                shadeClose: true,
+                shadeClose: false,// 点击遮罩区域，关闭弹层
                 maxmin: true, //开启最大化最小化按钮
                 area: ['900px', '600px'],
-                content: MODULE_PATH +'/Detail'
+                content: MODULE_PATH + '/Detail'
             });
         }
 
         window.edit = function (obj) {
-            layer.msg("修改");
+            layer.open({
+                type: 2,
+                title: '修改功能菜单',
+                shadeClose: false,// 点击遮罩区域，关闭弹层
+                maxmin: true, //开启最大化最小化按钮
+                area: ['900px', '600px'],
+                content: MODULE_PATH + '/Detail/' + obj.data['Id']
+            });
         }
 
         window.remove = function (obj) {
-            layer.confirm('确定要删除该用户', {
+            console.log(obj);
+            layer.confirm('确定要删除该数据？', {
                 icon: 3,
                 title: '提示'
             }, function (index) {
                 layer.close(index);
                 let loading = layer.load();
                 $.ajax({
-                    url: MODULE_PATH + "/Remove/" + obj.data['funcId'],
+                    url: MODULE_PATH + "/Remove/" + obj.data['Id'],
                     dataType: 'json',
-                    type: 'delete',
+                    type: 'POST',
                     success: function (result) {
                         layer.close(loading);
-                        if (result.success) {
+                        if (result.code=="0") {
                             layer.msg(result.msg, {
                                 icon: 1,
                                 time: 1000

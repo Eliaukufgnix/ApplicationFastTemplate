@@ -3,11 +3,11 @@
     ViewBag.Title = "Add";
 }
 
-<form class="layui-form" action="">
+<form class="layui-form" action="" lay-filter="funcDetailForm">
     <div class="layui-form-item">
         <label class="layui-form-label">Id<span style="color:red;">*</span></label>
         <div class="layui-col-xs10">
-            <input type="text" name="id" lay-verify="required" lay-reqtext="请输入Id" placeholder="请输入Id" autocomplete="off" class="layui-input">
+            <input type="text" id="id" name="id" lay-verify="required" lay-reqtext="请输入Id" placeholder="请输入Id" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -25,9 +25,9 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">功能路径<span style="color:red;">*</span></label>
+        <label class="layui-form-label">功能路径</label>
         <div class="layui-col-xs10">
-            <input type="text" name="funcurl" lay-verify="required" lay-reqtext="请输入功能路径" placeholder="请输入功能路径" lay-affix="clear" autocomplete="off" class="layui-input">
+            <input type="text" name="funcurl" placeholder="请输入功能路径" lay-affix="clear" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -38,8 +38,9 @@
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">父节点<span style="color:red;">*</span></label>
-        <div class="layui-col-xs10">
-            <input type="text" name="funcurl" lay-verify="required" lay-reqtext="请输入父节点" placeholder="请输入父节点" lay-affix="clear" autocomplete="off" class="layui-input">
+        <div class="layui-col-xs6">
+            <select lay-filter="parentid" id="parentid" name="parentid">
+            </select>
         </div>
     </div>
     <div class="layui-form-item">
@@ -54,26 +55,75 @@
         let form = layui.form;
         let layer = layui.layer;
         let $ = layui.jquery;
+        // 获取后台数据并填充表单
+        getFormData();
+        function getFormData() {
+            if ('@ViewBag.Id' != '') {
+                $('#id').prop('disabled', true);
+                let url = '/Func/GetFuncById/' +'@ViewBag.Id';  // 替换成您真实的后台数据接口地址
+                $.post(url, function (res) {
+                    if (res.code === "0") {
+                        let data = res.data;
+                        form.val('funcDetailForm', {
+                            "id": data.Id,
+                            "funcpara": data.FuncPara,
+                            "funcname": data.FuncName,
+                            "funcurl": data.FuncUrl,
+                            "funcicon": data.FuncIcon,
+                            "parentid": data.ParentId
+                        });
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                }).fail(function (xhr, status, error) {
+                    layer.msg(error);
+                });
+            }
+        }
         // 提交事件
         form.on('submit(btnSubmit)', function (data) {
-            var field = data.field; // 获取表单字段值
-            // 显示填写结果，仅作演示用
-            layer.alert(JSON.stringify(field), {
-                title: '当前填写的字段值'
-            });
-            // 此处可执行 Ajax 等操作
-            // …
-            console.log({ "funcDto": JSON.stringify(field) });
-            $.ajax({
-                url: "/Func/AddFunc",
-                data: { "funcDto": field},
-                type: "POST",
-                success: function (res) {
-                    console.log(res);
+            let field = data.field; // 获取表单字段值
+            let url = "";
+            if ('@ViewBag.Id'!='') {
+                url = "/Func/UpdateFunc"
+            } else {
+                url ="/Func/AddFunc"
+            }
+            $.post(url, { "reqData": field }, function (res) {
+                console.log(res);
+                if (res.code == "0") {
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.location.reload();//刷新父页面，注意一定要在关闭当前iframe层之前执行刷新
+                    parent.layer.close(index); //再执行关闭
                 }
+                else {
+                    layer.msg(res.msg);
+                }
+            }).fail(function (xhr, status, error) {
+                layer.msg(error);
             });
             return false; // 阻止默认 form 跳转
         });
     });
+
+    BindSelectData("#parentid", "/Func/BindSelectDataPartentId");
+    function BindSelectData(selectSelector, dataUrl) {
+        let $ = layui.jquery;
+        // 先添加默认选项 "请选择"
+        $(selectSelector).empty().append('<option value="">请选择</option><option value="ROOT">根节点</option>');
+
+        // 发起 AJAX 请求获取后端数据
+        $.post(dataUrl, function (res) {
+            // 遍历数据，将每个选项添加到 select 中
+            var data = res.data;
+            $.each(data, function (index, item) {
+                $(selectSelector).append('<option value="' + item.Value + '">' + item.Text + '</option>');
+            });
+
+            // 重新渲染 layui form 组件
+            layui.form.render('select');
+        });
+    }
+
 </script>
 

@@ -13,5 +13,14 @@ namespace Common.Utils
         {
             return dt.Hour * 10000 + dt.Minute * 100 + dt.Second;
         }
+
+        public static int GetDateNowInt()
+        {
+            return Date2Int(DateTime.Now);
+        }
+        public static int GetTimeNowInt()
+        {
+            return Time2Int(DateTime.Now);
+        }
     }
 }

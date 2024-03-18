@@ -1,4 +1,5 @@
 ﻿using Models;
+using System.Collections.Generic;
 
 namespace Service
 {
@@ -10,6 +11,8 @@ namespace Service
         /// <typeparam name="T"></typeparam>
         /// <param name="Entity"></param>
         /// <returns></returns>
-        bool Add(FuncDTO Entity);
+        bool AddFunc(FuncDTO Entity);
+
+        bool UpdateFunc(FuncDTO reqData);
     }
 }

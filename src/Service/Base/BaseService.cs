@@ -17,6 +17,7 @@ namespace Service
 
         public bool Add(T Entity)
         {
+            T t = repository.FindByID(Entity.Id);
             return repository.Add(Entity);
         }
 
@@ -27,7 +28,7 @@ namespace Service
 
         public T FindByID(dynamic ID)
         {
-            throw new NotImplementedException();
+            return repository.FindByID(ID);
         }
 
         public List<T> GetAll(Expression<Func<T, string>> OrderLambda = null)
@@ -42,7 +43,7 @@ namespace Service
 
         public bool GetAny(Expression<Func<T, bool>> WhereLambda = null)
         {
-            throw new NotImplementedException();
+            return repository.GetAny(WhereLambda);
         }
 
         public int GetCount(Expression<Func<T, bool>> WhereLambda = null)
@@ -77,7 +78,7 @@ namespace Service
 
         public bool RemoveByWhere(Expression<Func<T, bool>> whereLambda)
         {
-            throw new NotImplementedException();
+            return repository.RemoveByWhere(whereLambda);
         }
 
         public bool Update(T Entity)

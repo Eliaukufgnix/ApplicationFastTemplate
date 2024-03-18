@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using AutoMapper;
 using Models;
 using System.Reflection;
 using System.Web.Mvc;
@@ -13,7 +14,7 @@ namespace Web.App_Start
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
             builder.RegisterType<ApplicationDBContext>().AsSelf();
-
+            builder.Register(c => AutoMapperConfig.RegisterAutoMapper()).As<IMapper>().SingleInstance();
             Assembly repository = Assembly.Load("Repository");
             builder.RegisterAssemblyTypes(repository).Where(t => !t.IsAbstract).AsImplementedInterfaces().PropertiesAutowired();
             Assembly service = Assembly.Load("Service");

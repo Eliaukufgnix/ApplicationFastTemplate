@@ -117,10 +117,11 @@ namespace Repository
 
         public bool GetAny(Expression<Func<T, bool>> WhereLambda = null)
         {
-            throw new NotImplementedException();
+            // 如果没有传入条件，则返回整个表中是否存在记录
+            return WhereLambda == null ? db.Set<T>().Any() : db.Set<T>().Any(WhereLambda);
         }
 
-        public int GetCount(Expression<Func<T, bool>> WhereLambda = null)
+        public int GetCountByWhere(Expression<Func<T, bool>> WhereLambda = null)
         {
             throw new NotImplementedException();
         }

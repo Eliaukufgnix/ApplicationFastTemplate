@@ -19,7 +19,7 @@ namespace Models
         [JsonProperty("funcicon")]
         public string FuncIcon { get; set; }
 
-        [JsonProperty("parentid")]
-        public string PartentId { get; set; }
+        [JsonProperty("partentid")]
+        public string ParentId { get; set; }
     }
 }

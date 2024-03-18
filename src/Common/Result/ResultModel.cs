@@ -26,6 +26,11 @@ namespace Common
             return Result("0", "请求成功", default, 0);
         }
 
+        public static ResultModel<T> Success(string msg)
+        {
+            return Result("0", msg, default, 0);
+        }
+
         public static ResultModel<T> Success(string message, int count)
         {
             return Result("0", message, default, count);

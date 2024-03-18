@@ -24,6 +24,6 @@ namespace Models
 
         [Column("parentid")]
         [MaxLength(255)]
-        public string PartentId { get; set; }
+        public string ParentId { get; set; }
     }
 }

@@ -5,7 +5,7 @@
     "type": 1,
     "icon": "layui-icon layui-icon-console",
     "openType": "_iframe",
-    "href": "view/console/console1.html"
+    "href": "/Home/Index"
   },
   {
     "id": 1,

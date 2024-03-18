@@ -110,7 +110,7 @@ namespace Repository
         /// <typeparam name="T"></typeparam>
         /// <param name="WhereLambda"></param>
         /// <returns></returns>
-        int GetCount(Expression<Func<T, bool>> WhereLambda = null);
+        int GetCountByWhere(Expression<Func<T, bool>> WhereLambda = null);
 
         /// <summary>
         /// 判断对象是否存在
