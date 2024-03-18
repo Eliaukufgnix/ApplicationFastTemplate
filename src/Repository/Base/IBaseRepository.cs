@@ -31,6 +31,14 @@ namespace Repository
         bool Remove(T Entity);
 
         /// <summary>
+        /// 批量删除多个实体
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="Entity"></param>
+        /// <returns></returns>
+        bool RemoveRange(List<T> Entity);
+
+        /// <summary>
         /// 根据查询条件进行删除单个实体
         /// </summary>
         /// <typeparam name="T"></typeparam>

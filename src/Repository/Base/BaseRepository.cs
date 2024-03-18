@@ -36,6 +36,12 @@ namespace Repository
             return db.SaveChanges() > 0;
         }
 
+        public bool RemoveRange(List<T> Entity)
+        {
+            db.Set<T>().RemoveRange(Entity);
+            return db.SaveChanges() > 0;
+        }
+
         public bool RemoveByWhere(Expression<Func<T, bool>> whereLambda)
         {
             var EntityModel = db.Set<T>().Where(whereLambda).FirstOrDefault();

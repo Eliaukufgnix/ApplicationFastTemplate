@@ -18,6 +18,7 @@ namespace Common.Utils
         {
             return Date2Int(DateTime.Now);
         }
+
         public static int GetTimeNowInt()
         {
             return Time2Int(DateTime.Now);

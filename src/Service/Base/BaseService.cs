@@ -76,6 +76,11 @@ namespace Service
             throw new NotImplementedException();
         }
 
+        public bool RemoveRange(List<T> Entity)
+        {
+            return repository.RemoveRange(Entity);
+        }
+
         public bool RemoveByWhere(Expression<Func<T, bool>> whereLambda)
         {
             return repository.RemoveByWhere(whereLambda);

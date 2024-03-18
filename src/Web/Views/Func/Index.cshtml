@@ -19,39 +19,39 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">Id</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="Id" placeholder="" class="layui-input">
+                        <input type="text" name="Id" placeholder="" class="layui-input" lay-affix="clear">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">菜单名称</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="FuncName" placeholder="" class="layui-input">
+                        <input type="text" name="FuncName" placeholder="" class="layui-input" lay-affix="clear">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">Url</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="FuncUrl" placeholder="" class="layui-input">
+                        <input type="text" name="FuncUrl" placeholder="" class="layui-input" lay-affix="clear">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">图标</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="FuncIcon" placeholder="" class="layui-input">
+                        <input type="text" name="FuncIcon" placeholder="" class="layui-input" lay-affix="clear">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">父节点</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="ParentId" placeholder="" class="layui-input">
+                        <input type="text" name="ParentId" placeholder="" class="layui-input" lay-affix="clear">
                     </div>
                 </div>
                 <div class="layui-inline" style="margin-left: 50px;">
-                    <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="func-query">
+                    <button type="button" class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="func-query">
                         <i class="layui-icon layui-icon-search"></i>
                         查询
                     </button>
-                    <button type="reset" class="pear-btn pear-btn-md">
+                    <button type="reset" class="pear-btn pear-btn-md" id="func-reset">
                         <i class="layui-icon layui-icon-refresh"></i>
                         重置
                     </button>
@@ -88,45 +88,11 @@
     </button>
 </script>
 
-@*<script type="text/html" id="func-enable">
-        <input type="checkbox" name="enable" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="func-enable"
-               checked="{{ d.enable == 0 ? 'true' : 'false' }}">
-    </script>*@
-
-@*<script type="text/html" id="func-sex">
-        {{#if (d.sex == 1) { }}
-        <span>男</span>
-        {{# }else if(d.sex == 2){ }}
-        <span>女</span>
-        {{# } }}
-    </script>*@
-
-@*<script type="text/html" id="func-login">
-        {{#if (d.login == 0) { }}
-        <span>在线</span>
-        {{# }else if(d.sex == 1){ }}
-        <span>离线</span>
-        {{# } }}
-    </script>*@
-
-@*<script type="text/html" id="func-createTime">
-        {{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}
-    </script>*@
-
-@*<div style="display: none;">
-        <div class="layer-top">
-            <br />
-            <h3>上侧弹层内容...</h3>
-        </div>
-    </div>*@
-
 <script>
     layui.use(['table', 'form', 'jquery', 'drawer', 'dropdown'], function () {
         let table = layui.table;
         let form = layui.form;
         let $ = layui.jquery;
-        let drawer = layui.drawer;
-        let dropdown = layui.dropdown;
         let layer = layui.layer;
         let MODULE_PATH = "/Func";
 
@@ -267,8 +233,9 @@
 
         table.render({
             elem: '#func-table',
+            id: "func-table",
             url: MODULE_PATH + "/GetFunc",
-            method:"POST",
+            method: "POST",
             page: true,
             cols: cols,
             skin: 'grid',
@@ -303,15 +270,17 @@
         });
 
         form.on('submit(func-query)', function (data) {
-            console.log(data.field);
             table.reload('func-table', {
-                where: data.field
-            })
-            return false;
+                where: { "funcDTO": data.field },
+                url: MODULE_PATH + "/GetFuncByWhere"
+            });
         });
 
-        form.on('switch(func-enable)', function (obj) {
-            layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
+        $('#func-reset').on('click', function (data) {
+            table.reload('func-table', {
+                where: { "funcDTO": data.field },
+                url: MODULE_PATH + "/GetFuncByWhere"
+            });
         });
 
         window.add = function () {
@@ -337,7 +306,6 @@
         }
 
         window.remove = function (obj) {
-            console.log(obj);
             layer.confirm('确定要删除该数据？', {
                 icon: 3,
                 title: '提示'
@@ -350,7 +318,7 @@
                     type: 'POST',
                     success: function (result) {
                         layer.close(loading);
-                        if (result.code=="0") {
+                        if (result.code == "0") {
                             layer.msg(result.msg, {
                                 icon: 1,
                                 time: 1000
@@ -377,11 +345,7 @@
                 });
                 return false;
             }
-            let ids = "";
-            for (let i = 0; i < data.length; i++) {
-                ids += data[i].Id + ",";
-            }
-            ids = ids.substr(0, ids.length - 1);
+            let ids = data.map(item => item.Id); // 提取所有数据的 Id 组成数组
             layer.confirm('确定要删除这些数据吗', {
                 icon: 3,
                 title: '提示'
@@ -391,10 +355,11 @@
                 $.ajax({
                     url: MODULE_PATH + "/batchRemove/" + ids,
                     dataType: 'json',
-                    type: 'delete',
+                    type: 'POST',
+                    data: { ids: ids }, // 将 Id 数组作为参数传递给后端
                     success: function (result) {
                         layer.close(loading);
-                        if (result.success) {
+                        if (result.code == "0") {
                             layer.msg(result.msg, {
                                 icon: 1,
                                 time: 1000
