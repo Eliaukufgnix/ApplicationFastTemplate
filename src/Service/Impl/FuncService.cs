@@ -4,6 +4,7 @@ using Models;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Service
 {
@@ -16,12 +17,6 @@ namespace Service
             this.mapper = mapper;
         }
 
-        /// <summary>
-        /// 添加实体
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="Entity"></param>
-        /// <returns></returns>
         public bool AddFunc(FuncDTO funcDTO)
         {
             if (repository.GetAny(x => x.Id == funcDTO.Id))
@@ -89,6 +84,37 @@ namespace Service
                 funcs.Add(func);
             }
             return repository.RemoveRange(funcs);
+        }
+
+        public List<FuncVO> BuildFunc(List<Func> funcEntities, string parentId)
+        {
+            var menuItems = new List<FuncVO>();
+
+            var childEntities = funcEntities.Where(e => e.ParentId == parentId).ToList();
+
+            foreach (var entity in childEntities)
+            {
+                var menuItem = new FuncVO
+                {
+                    id = entity.Id,
+                    title = entity.FuncName,
+                    icon = entity.FuncIcon,
+                    href = entity.FuncUrl,
+                    children = BuildFunc(funcEntities, entity.Id)
+                };
+                if (menuItem.children.Count > 0)
+                {
+                    menuItem.type = "0";
+                }
+                else
+                {
+                    menuItem.type = "1";
+                    menuItem.openType = "_iframe";
+                }
+                menuItems.Add(menuItem);
+            }
+
+            return menuItems;
         }
     }
 }

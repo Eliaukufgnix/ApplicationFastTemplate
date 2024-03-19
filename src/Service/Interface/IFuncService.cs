@@ -33,5 +33,10 @@ namespace Service
         /// <param name="ids"></param>
         /// <returns></returns>
         bool BatchRemove(string[] ids);
+
+        /// <summary>
+        /// 递归构建子节点
+        /// </summary>
+        List<FuncVO> BuildFunc(List<Func> funcEntities, string parentId);
     }
 }

@@ -1,10 +1,10 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : SQLServer
+ Source Server         : mssql
  Source Server Type    : SQL Server
  Source Server Version : 16001000
- Source Host           : DESKTOP-GOVJGNI\SQLEXPRESS:1433
+ Source Host           : LG4266\SQLEXPRESS:1433
  Source Catalog        : dotnet
  Source Schema         : dbo
 
@@ -12,7 +12,7 @@
  Target Server Version : 16001000
  File Encoding         : 65001
 
- Date: 19/03/2024 00:32:37
+ Date: 19/03/2024 10:04:29
 */
 
 
@@ -123,25 +123,28 @@ GO
 -- ----------------------------
 -- Records of func
 -- ----------------------------
-INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'1', NULL, N'首页', N'admin', N'/Home/Index', N'layui-icon layui-icon-console', N'ROOT', N'20240316', N'233742', N'admin', N'20240316', N'233742')
+INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'0', NULL, N'首页', N'admin', N'/Home/Index', N'layui-icon layui-icon-console', N'ROOT', N'20240316', N'233742', N'admin', N'20240316', N'233742')
 GO
 
-INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'10', NULL, N'系统设置', N'admin', NULL, N'layui-icon layui-icon-console', N'2', N'20240318', N'113506', N'admin', N'20240318', N'113506')
+INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'1', NULL, N'系统及门户管理', N'admin', NULL, N'layui-icon layui-icon-console', N'ROOT', N'20240316', N'233742', N'admin', N'20240316', N'233742')
 GO
 
-INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'2', NULL, N'系统及门户管理', N'admin', N'', N'layui-icon layui-icon-console', N'ROOT', N'20240316', N'233742', N'admin', N'20240316', N'233742')
+INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'10', NULL, N'系统设置', N'admin', NULL, N'layui-icon layui-icon-console', N'1', N'20240318', N'113506', N'admin', N'20240318', N'113506')
 GO
 
-INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'3', NULL, N'基础数据管理', N'admin', N'/BasicData/Index', N'layui-icon layui-icon-console', N'1', N'20240318', N'111455', N'admin', N'20240318', N'111455')
+INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'102', NULL, N'系统菜单管理', N'admin', N'/func/index', N'layui-icon layui-icon-console', N'10', N'20240319', N'100010', N'admin', N'20240319', N'100010')
 GO
 
-INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'4', NULL, N'供应商生命周期管理', N'admin', NULL, N'layui-icon layui-icon-console', N'ROOT', N'20240318', N'112205', N'admin', N'20240318', N'205453')
+INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'2', NULL, N'基础数据管理', N'admin', N'/BasicData/Index', N'layui-icon layui-icon-console', N'ROOT', N'20240318', N'111455', N'admin', N'20240319', N'84445')
 GO
 
-INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'5', NULL, N'采购寻源管理', N'admin', NULL, N'layui-icon layui-icon-console', N'ROOT', N'20240318', N'112551', N'admin', N'20240318', N'112551')
+INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'3', NULL, N'供应商生命周期管理', N'admin', NULL, N'layui-icon layui-icon-console', N'ROOT', N'20240318', N'112205', N'admin', N'20240318', N'205453')
 GO
 
-INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'6', NULL, N'采购协同管理', N'admin', NULL, N'layui-icon layui-icon-console', N'ROOT', N'20240318', N'112901', N'admin', N'20240318', N'112901')
+INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'4', NULL, N'采购寻源管理', N'admin', NULL, N'layui-icon layui-icon-console', N'ROOT', N'20240318', N'112551', N'admin', N'20240318', N'112551')
+GO
+
+INSERT INTO [dbo].[func] ([id], [funcpara], [funcname], [createuser], [funcurl], [funcicon], [parentid], [createdata], [createtime], [loguser], [logdate], [logtime]) VALUES (N'5', NULL, N'采购协同管理', N'admin', NULL, N'layui-icon layui-icon-console', N'ROOT', N'20240318', N'112901', N'admin', N'20240318', N'112901')
 GO
 
 

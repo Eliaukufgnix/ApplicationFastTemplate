@@ -4,8 +4,8 @@
 		"image": "/Scripts/admin/images/logo.png"
 	},
 	"menu": {
-		"data": "/Scripts/admin/data/menu.json",
-		"method": "GET",
+		"data": "/Home/RecursionBuildFuncTree",
+		"method": "POST",
 		"accordion": true,
 		"collapse": false,
 		"control": false,
