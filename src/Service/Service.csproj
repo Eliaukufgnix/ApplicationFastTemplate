@@ -47,7 +47,9 @@
     <Compile Include="Base\BaseService.cs" />
     <Compile Include="Base\IBaseService.cs" />
     <Compile Include="Impl\FuncService.cs" />
+    <Compile Include="Impl\SysUserService.cs" />
     <Compile Include="Interface\IFuncService.cs" />
+    <Compile Include="Interface\ISysUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

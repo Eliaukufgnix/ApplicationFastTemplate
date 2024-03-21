@@ -53,7 +53,7 @@ namespace Service
 
         public T GetFristDefault(Expression<Func<T, bool>> WhereLambda = null)
         {
-            throw new NotImplementedException();
+            return repository.GetFristDefault(WhereLambda);
         }
 
         public List<T> Pagination(int PageIndex, int PageSize, out int TotalCount, Expression<Func<T, int>> OrderBy = null, bool IsOrder = true, Expression<Func<T, bool>> WhereLambda = null)

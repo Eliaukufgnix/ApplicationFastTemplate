@@ -8,15 +8,15 @@ using System.Web.Mvc;
 
 namespace Web.Controllers
 {
-    public class FuncController : Controller
+    public class FuncController : BaseController
     {
         #region 构造函数
 
-        private readonly IFuncService func;
+        private readonly IFuncService funcService;
 
-        public FuncController(IFuncService func)
+        public FuncController(IFuncService funcService)
         {
-            this.func = func;
+            this.funcService = funcService;
         }
 
         #endregion 构造函数
@@ -52,7 +52,7 @@ namespace Web.Controllers
         {
             try
             {
-                List<Func> data = func.GetFuncByWhere(funcDTO);
+                List<Func> data = funcService.GetFuncByWhere(funcDTO);
                 ResultModel<List<Func>> result = ResultModel<List<Func>>.Success(data, data.Count());
                 return Json(result);
             }
@@ -70,7 +70,7 @@ namespace Web.Controllers
         {
             try
             {
-                List<Func> data = func.Pagination(page, limit, out int count);
+                List<Func> data = funcService.Pagination(page, limit, out int count);
                 ResultModel<List<Func>> result = ResultModel<List<Func>>.Success(data, count);
                 return Json(result);
             }
@@ -88,7 +88,7 @@ namespace Web.Controllers
         {
             try
             {
-                Func data = func.FindByID(Id);
+                Func data = funcService.FindByID(Id);
                 ResultModel<Func> result = ResultModel<Func>.Success(data, 1);
                 return Json(result);
             }
@@ -106,7 +106,7 @@ namespace Web.Controllers
         {
             try
             {
-                func.AddFunc(reqData);
+                funcService.AddFunc(reqData);
                 ResultModel<Func> result = ResultModel<Func>.Success();
                 return Json(result);
             }
@@ -124,7 +124,7 @@ namespace Web.Controllers
         {
             try
             {
-                func.RemoveByWhere(x => x.Id == id);
+                funcService.RemoveByWhere(x => x.Id == id);
                 ResultModel<Func> result = ResultModel<Func>.Success("删除成功");
                 return Json(result);
             }
@@ -142,7 +142,7 @@ namespace Web.Controllers
         {
             try
             {
-                func.BatchRemove(ids);
+                funcService.BatchRemove(ids);
                 ResultModel<List<Func>> result = ResultModel<List<Func>>.Success("批量删除成功！");
                 return Json(result);
             }
@@ -160,7 +160,7 @@ namespace Web.Controllers
         {
             try
             {
-                func.UpdateFunc(reqData);
+                funcService.UpdateFunc(reqData);
                 ResultModel<Func> result = ResultModel<Func>.Success();
                 return Json(result);
             }
@@ -178,7 +178,7 @@ namespace Web.Controllers
         {
             try
             {
-                List<Func> data = func.GetAll();
+                List<Func> data = funcService.GetAll();
                 List<SelectListItem> list = new List<SelectListItem>();
                 foreach (var item in data)
                 {

@@ -11,9 +11,9 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-row">
-            <label class="layui-form-label">功能参数</label>
+            <label class="layui-form-label">功能代码</label>
             <div class="layui-col-xs10">
-                <input type="text" name="funcpara" placeholder="请输入功能参数" autocomplete="off" class="layui-input">
+                <input type="text" name="funccode" placeholder="请输入功能代码" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -65,7 +65,7 @@
                         let data = res.data;
                         form.val('funcDetailForm', {
                             "id": data.Id,
-                            "funcpara": data.FuncPara,
+                            "funccode": data.FuncCode,
                             "funcname": data.FuncName,
                             "funcurl": data.FuncUrl,
                             "funcicon": data.FuncIcon,

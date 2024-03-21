@@ -54,7 +54,9 @@
     <Compile Include="Base\BaseRepository.cs" />
     <Compile Include="Base\IBaseRepository.cs" />
     <Compile Include="Impl\FuncRepository.cs" />
+    <Compile Include="Impl\SysUserRepository.cs" />
     <Compile Include="Interface\IFuncRepository.cs" />
+    <Compile Include="Interface\ISysUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

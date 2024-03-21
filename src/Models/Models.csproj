@@ -57,16 +57,18 @@
     <Compile Include="ApplicationDBContext.cs" />
     <Compile Include="CommonColumn.cs" />
     <Compile Include="DTO\FuncDTO.cs" />
-    <Compile Include="Func.cs" />
+    <Compile Include="DTO\LoginVerifyDTO.cs" />
+    <Compile Include="Entities\Func.cs" />
+    <Compile Include="Entities\FuncUserGroup.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Entities\SysUser.cs" />
     <Compile Include="VO\FuncVO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

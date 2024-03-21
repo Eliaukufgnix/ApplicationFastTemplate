@@ -16,5 +16,7 @@ namespace Models
         }
 
         public DbSet<Func> Func { get; set; }
+        public DbSet<SysUser> SysUser { get; set; }
+        public DbSet<FuncUserGroup> FuncUserGroup { get; set; }
     }
 }

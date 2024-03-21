@@ -99,7 +99,7 @@
     </div>
     <!-- 框 架 初 始 化 -->
     <script>
-    layui.use(['admin', 'jquery', 'popup', 'drawer'], function () {
+        layui.use(['admin', 'jquery', 'popup', 'drawer'], function () {
             var $ = layui.jquery;
             var admin = layui.admin;
             var popup = layui.popup;
@@ -111,11 +111,15 @@
 
             // 登出逻辑
             admin.logout(function () {
-                popup.success("注销成功", function () {
-                    location.href = "login.html";
+                $.post("/Home/SignOut", function (res) {
+                    if (res.code === "0") {
+                        popup.success("注销成功", function () {
+                            location.href = "/Home/Login";
+                        })
+                    }
+                    // 注销逻辑 返回 true / false
+                    return true;
                 })
-                // 注销逻辑 返回 true / false
-                return true;
             })
 
             // 消息点击回调

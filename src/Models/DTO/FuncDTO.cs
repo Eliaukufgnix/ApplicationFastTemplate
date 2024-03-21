@@ -7,8 +7,8 @@ namespace Models
         [JsonProperty("id")]
         public string Id { get; set; }
 
-        [JsonProperty("funcpara")]
-        public string FuncPara { get; set; }
+        [JsonProperty("funccode")]
+        public string FuncCode { get; set; }
 
         [JsonProperty("funcname")]
         public string FuncName { get; set; }
