@@ -47,6 +47,13 @@ namespace Service
         bool RemoveByWhere(Expression<Func<T, bool>> whereLambda);
 
         /// <summary>
+        /// 通过id数组批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        bool BatchRemove(string[] ids);
+
+        /// <summary>
         ///单个对象的修改
         /// </summary>
         /// <typeparam name="T"></typeparam>

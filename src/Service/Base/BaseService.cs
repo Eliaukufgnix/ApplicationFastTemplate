@@ -86,6 +86,16 @@ namespace Service
             return repository.RemoveByWhere(whereLambda);
         }
 
+        public bool BatchRemove(string[] ids)
+        {
+            List<T> list = new List<T>();
+            foreach (var item in ids)
+            {
+                T t = repository.FindByID(item);
+                list.Add(item: t);
+            }
+            return repository.RemoveRange(list);
+        }
         public bool Update(T Entity)
         {
             throw new NotImplementedException();
