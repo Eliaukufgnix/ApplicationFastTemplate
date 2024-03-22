@@ -35,12 +35,7 @@ namespace Service
 
         public bool UpdateFunc(FuncDTO funcDTO)
         {
-            if (!repository.GetAny(x => x.Id == funcDTO.Id))
-            {
-                throw new Exception("未找到该数据信息！");
-            }
-            Func func = repository.FindByID(funcDTO.Id);
-            // 使用 AutoMapper 更新 FuncDTO 的属性到已存在的 Func 实体
+            Func func = repository.FindByID(funcDTO.Id) ?? throw new Exception("未找到该数据信息！");
             mapper.Map(funcDTO, func);
             func.LogUser = "admin";
             func.LogDate = DateTimeHelper.GetDateNowInt();
@@ -73,17 +68,6 @@ namespace Service
                 list = repository.GetAllByWhere(x => x.ParentId.Contains(funcDTO.ParentId));
             }
             return list;
-        }
-
-        public bool BatchRemove(string[] ids)
-        {
-            List<Func> funcs = new List<Func>();
-            foreach (var item in ids)
-            {
-                Func func = repository.FindByID(item);
-                funcs.Add(func);
-            }
-            return repository.RemoveRange(funcs);
         }
 
         public List<FuncVO> BuildFunc(List<Func> funcEntities, string parentId)
